@@ -2,56 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Harshit Sharma Portfolio — Light, minimalist, Dribbble-inspired */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core surfaces */
+    --background: 40 33% 97%;          /* warm cream */
+    --foreground: 220 18% 12%;         /* near-black ink */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 18% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 18% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 220 18% 10%;            /* deep ink */
+    --primary-foreground: 40 33% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 36 30% 92%;           /* warm beige */
+    --secondary-foreground: 220 18% 12%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 36 22% 94%;
+    --muted-foreground: 220 10% 42%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 14 88% 64%;              /* coral accent */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --pastel-peach: 18 90% 88%;
+    --pastel-mint:  155 50% 86%;
+    --pastel-sky:   210 80% 88%;
+    --pastel-lilac: 265 60% 90%;
+    --pastel-yellow: 45 95% 82%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 220 18% 12%;
+
+    --radius: 1.25rem;
+
+    /* Gradients */
+    --gradient-rainbow: linear-gradient(120deg, hsl(var(--pastel-peach)), hsl(var(--pastel-yellow)), hsl(var(--pastel-mint)), hsl(var(--pastel-sky)), hsl(var(--pastel-lilac)));
+    --gradient-sun: radial-gradient(circle at 30% 30%, hsl(var(--pastel-yellow)), hsl(var(--pastel-peach)) 60%, transparent 80%);
+
+    /* Shadows */
+    --shadow-soft: 0 10px 40px -12px hsl(220 18% 12% / 0.12);
+    --shadow-card: 0 4px 20px -8px hsl(220 18% 12% / 0.08);
+    --shadow-glow: 0 20px 60px -20px hsl(var(--accent) / 0.45);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -100,6 +108,32 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .font-serif-display { font-family: 'Instrument Serif', serif; }
+  .font-body { font-family: 'Inter', sans-serif; }
+
+  .bg-gradient-rainbow { background: var(--gradient-rainbow); }
+  .bg-gradient-sun { background: var(--gradient-sun); }
+
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+
+  .grain::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(hsl(220 18% 12% / 0.06) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
   }
 }
