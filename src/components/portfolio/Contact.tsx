@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { toast } from "@/hooks/use-toast";
 
 const LinkedInIcon = ({ className = "" }: { className?: string }) => (
@@ -29,15 +30,39 @@ const socials = [
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
       toast({ title: "Please fill in all fields", variant: "destructive" });
       return;
     }
-    toast({ title: "Message sent ✨", description: "I'll get back to you soon, promise." });
-    setForm({ name: "", email: "", message: "" });
+    try {
+      setSending(true);
+      await emailjs.send(
+        "service_yw9dtpn",
+        "template_oy43qlb",
+        {
+          from_name: form.name,
+          from_email: form.email,
+          reply_to: form.email,
+          message: form.message,
+        },
+        { publicKey: "PAL2BJnVpKJX9nyDK" }
+      );
+      toast({ title: "Message sent ✨", description: "I'll get back to you soon, promise." });
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      toast({
+        title: "Couldn't send message",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -96,9 +121,10 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              className="mt-8 group inline-flex items-center gap-2 bg-foreground text-background px-7 py-3.5 rounded-full font-medium hover:bg-accent hover:shadow-glow transition-all"
+              disabled={sending}
+              className="mt-8 group inline-flex items-center gap-2 bg-foreground text-background px-7 py-3.5 rounded-full font-medium hover:bg-accent hover:shadow-glow transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Send Message
+              {sending ? "Sending…" : "Send Message"}
               <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
             </button>
           </motion.form>
