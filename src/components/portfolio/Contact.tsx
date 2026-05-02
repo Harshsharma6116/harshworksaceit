@@ -151,6 +151,8 @@ const Contact = () => {
               <a
                 key={s.label}
                 href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center justify-between bg-card border border-border/60 rounded-2xl px-6 py-5 hover:bg-foreground hover:text-background transition-all duration-300"
               >
                 <div className="flex items-center gap-4">
