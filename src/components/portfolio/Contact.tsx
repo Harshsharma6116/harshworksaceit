@@ -23,8 +23,18 @@ const DiscordIcon = ({ className = "" }: { className?: string }) => (
 );
 
 const socials = [
-  { Icon: LinkedInIcon, label: "LinkedIn", handle: "@harshitsharma", href: "#" },
-  { Icon: InstagramIcon, label: "Instagram", handle: "@harshit", href: "#" },
+  {
+    Icon: LinkedInIcon,
+    label: "LinkedIn",
+    handle: "Harshit Sharma",
+    href: "https://www.linkedin.com/in/harshit-sharma",
+  },
+  {
+    Icon: InstagramIcon,
+    label: "Instagram",
+    handle: "@harshit_sharma_xvr",
+    href: "https://instagram.com/harshit_sharma_xvr",
+  },
   { Icon: DiscordIcon, label: "Discord", handle: "harshit#0001", href: "#" },
 ];
 
